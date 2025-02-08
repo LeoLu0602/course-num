@@ -9,6 +9,6 @@ import com.example.app.model.Course;
 public class CourseController {
 	@GetMapping("/api/v1/course")
 	public Course test() {
-		return new Course(0L, "CSE", 6341);
+		return new Course(0L, "The Ohio State University", "CSE", 6341, "Foundations of Programming Languages");
 	}    
 }
