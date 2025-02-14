@@ -29,5 +29,4 @@ public class CourseController {
         
 		return course.orElse(null);
 	}
-	
 }
