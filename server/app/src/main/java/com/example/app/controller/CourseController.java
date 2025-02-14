@@ -1,10 +1,14 @@
 package com.example.app.controller;
 
+import java.util.Optional;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.app.model.Course;
 import com.example.app.repository.CourseRepository;
+
 
 @RestController
 public class CourseController {
@@ -16,7 +20,14 @@ public class CourseController {
 	}
 
 	@GetMapping("/api/v1/courses")
-	public Iterable<Course> findAllCourses() {
-		return this.courseRepository.findAll();
-	}    
+	public Course getMethodName(
+		@RequestParam(value = "school", defaultValue = "") String school,
+		@RequestParam(value = "department", defaultValue = "") String department,
+		@RequestParam(value = "num", defaultValue = "") int num
+	) {
+		Optional<Course> course = courseRepository.findBySchoolAndDepartmentAndNum(school, department, num);
+        
+		return course.orElse(null);
+	}
+	
 }
