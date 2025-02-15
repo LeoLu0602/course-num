@@ -46,5 +46,18 @@ public class CourseControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk())
             .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Foundation of Programming Languages"));
     }
+
+    @Test
+    void testCourseNotFound() throws Exception {
+            when(courseRepository.findBySchoolAndDepartmentAndNum("University of Michigan", "ECE", 470))
+                .thenReturn(Optional.empty());
+
+    
+            mockMvc.perform(get("/api/v1/courses")
+                .param("school", "University of Michigan")
+                .param("department", "ECE")
+                .param("num", "470"))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest());
+        }
 }
 
