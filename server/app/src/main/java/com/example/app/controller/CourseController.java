@@ -2,6 +2,7 @@ package com.example.app.controller;
 
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +21,17 @@ public class CourseController {
 	}
 
 	@GetMapping("/api/v1/courses")
-	public Course getMethodName(
+	public ResponseEntity<Course> getMethodName(
 		@RequestParam(value = "school", defaultValue = "") String school,
 		@RequestParam(value = "department", defaultValue = "") String department,
 		@RequestParam(value = "num", defaultValue = "") int num
 	) {
 		Optional<Course> course = courseRepository.findBySchoolAndDepartmentAndNum(school, department, num);
         
-		return course.orElse(null);
+		if (course.isPresent()) {
+			return ResponseEntity.ok(course.get());
+		}
+
+		return ResponseEntity.badRequest().build();
 	}
 }
