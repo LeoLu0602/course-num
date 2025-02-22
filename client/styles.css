@@ -1,0 +1,14 @@
+.box {
+    position: fixed;
+    z-index: 9999;
+    left: 1rem;
+    bottom: 1rem;
+    padding: 1rem;
+    background-color: #ba0c2f;
+    color: white;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
