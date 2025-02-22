@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+    "name": "Course Number Translator",
+    "version": "1.0",
+  
+    "description": "A tool that instantly translates a course number (e.g., CSE 6331) to title (e.g., Algorithms) with a double-click.",
+  
+    "icons": {},
+  
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+      }
+    ]
+  }
+  
