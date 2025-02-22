@@ -32,6 +32,6 @@ public class CourseController {
 			return ResponseEntity.ok(course.get());
 		}
 
-		return ResponseEntity.badRequest().build();
+		return ResponseEntity.notFound().build();
 	}
 }

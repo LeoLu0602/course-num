@@ -57,7 +57,7 @@ public class CourseControllerTest {
                 .param("school", "University of Michigan")
                 .param("department", "ECE")
                 .param("num", "470"))
-            .andExpect(MockMvcResultMatchers.status().isBadRequest());
+            .andExpect(MockMvcResultMatchers.status().isNotFound());
         }
 }
 
