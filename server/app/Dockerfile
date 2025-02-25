@@ -14,7 +14,7 @@ COPY server/app /app
 RUN mvn clean install -DskipTests
 
 # Copy the JAR file into the container.
-COPY /app/target/*.jar app.jar
+COPY server/app/target/*.jar app.jar
 
 # Expose the application's port. (Render sets the PORT environment variable)
 EXPOSE 8080
