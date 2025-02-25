@@ -1,23 +1,8 @@
-# Use an official OpenJDK runtime as a parent image.
-FROM eclipse-temurin:23-jdk
+FROM maven:3.8.5-openjdk-23 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Set the working directory inside the container.
-WORKDIR /app
-
-# Install Maven (or other build tools if needed).
-RUN apt-get update && apt-get install -y maven
-
-# Copy the source code into the container.
-COPY . /app
-
-# Build the project inside the container.
-RUN mvn clean install -DskipTests
-
-# Copy the JAR file into the container.
-COPY /target/*.jar app.jar
-
-# Expose the application's port. (Render sets the PORT environment variable)
+FROM openjdk:23.0.1-jdk-slim
+COPY --from=build /target/app-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
-
-# Command to run the application
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
