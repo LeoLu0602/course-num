@@ -7,8 +7,8 @@ WORKDIR /app
 # Install Maven (or other build tools if needed).
 RUN apt-get update && apt-get install -y maven
 
-# Copy the source code into the container.
-COPY . .
+# Copy the source code (including pom.xml) into the container.
+COPY . /app
 
 # Build the project inside the container.
 RUN mvn clean install -DskipTests
